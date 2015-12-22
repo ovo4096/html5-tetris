@@ -1,52 +1,78 @@
-Cosco = {
-    new: function (settings) {
-        var self = {}; // ~= this
+Cosco = (function () {
+    var Cosco = {
+        new: function (settings) {
+            var self = {}; // ~= this
 
-        var context;
-        var updateTimer;
+            var context;
+            var updateAnimationFrame;
 
-        self.init = function () {
-            console.log("[DEBUG]:Cosco init");
-            context = settings.canvas.getContext("2d");
-            settings.canvas.width = settings.width;
-            settings.canvas.height = settings.height;
-        };
+            self.start = function () {
+                console.log("[DEBUG]:Cosco start");
+                init();
+                updateAnimationFrame = window.requestAnimationFrame(update);
+            };
 
-        self.start = function () {
-            console.log("[DEBUG]:Cosco start");
-            self.init();
-            updateTimer = setInterval(self.update, 1000);
-        };
+            self.exit = function () {
+                console.log("[DEBUG]:Cosco exit");
+                window.cancelAnimationFrame(updateAnimationFrame);
+                destroy();
+            };
 
-        self.exit = function () {
-            console.log("[DEBUG]:Cosco exit");
-            clearInterval(updateTimer);
-        };
+            self.clear = function (color) {
+                context.clearRect(0, 0, settings.width, settings.height);
+                context.fillStyle = color;
+                context.fillRect(0, 0, settings.width, settings.height);
+            };
 
-        self.update = function () {
-            console.log("[DEBUG]:Cosco update");
-            self.updateKeyboard();
-            self.updateDraw();
-        };
+            function init() {
+                console.log("[DEBUG]:Cosco init");
+                context = settings.canvas.getContext("2d");
+                settings.canvas.width = settings.width;
+                settings.canvas.height = settings.height;
 
-        self.updateKeyboard = function () {
-            console.log("[DEBUG]:Cosco updateKeyboard");
-        };
+                if (typeof self.update !== "undefined") {
+                    self.init();
+                }
+            }
 
-        self.updateDraw = function () {
-            console.log("[DEBUG]:Cosco updateDraw");
-            context.clearRect(0,0, settings.width, settings.height);
-            context.fillStyle = "#66CCFF";
-            context.fillRect(0, 0, settings.width, settings.height);
+            function destroy() {
+                console.log("[DEBUG]:Cosco destroy");
 
-            context.font = "30px Arial";
-            context.fillStyle = "#333";
-            context.fillText("Hello World", 0, 30);
+                if (typeof self.destroy !== "undefined") {
+                    self.destroy();
+                }
+            }
 
-            context.fillStyle = "#666";
-            context.fillText("Hello World", 0, 60);
-        };
+            function update(timestamp) {
+                console.log("[DEBUG]:Cosco update " + timestamp);
+                //updateKeyboard(timestamp);
 
-        return self;
-    }
-};
+                if (typeof self.update !== "undefined") {
+                    self.update(timestamp);
+                }
+
+                draw(timestamp);
+                updateAnimationFrame = window.requestAnimationFrame(update);
+            }
+
+            //function updateKeyboard(timestamp) {
+            //    console.log("[DEBUG]:Cosco updateKeyboard");
+            //}
+
+            function draw(timestamp) {
+                console.log("[DEBUG]:Cosco updateDraw");
+                self.clear("#66CCFF");
+
+                if (typeof self.draw !== "undefined") {
+                    self.draw(timestamp);
+                }
+            }
+
+            return self;
+        },
+
+        Game: {}
+    };
+
+    return Cosco;
+}());

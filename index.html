@@ -6,16 +6,24 @@
 </head>
 <body>
 <canvas id="test"></canvas>
-
+<button id="cancel">cancel game</button>
 <script src="js/cosco.js"></script>
-<script src="js/game.js"></script>
+<script src="js/cosco.game.tetris.js"></script>
 <script>
-    var cosco = Cosco.new({
+
+    var Tetris = Cosco.Game.Tetris;
+
+    var tetris = Tetris.new({
         width: 320,
         height: 200,
         canvas: document.getElementById("test")
     });
-    cosco.start();
+
+    tetris.start();
+
+    document.getElementById("cancel").onclick = function () {
+        tetris.exit();
+    }
 </script>
 </body>
 </html>
