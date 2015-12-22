@@ -30,7 +30,7 @@ Cosco = (function () {
                 settings.canvas.width = settings.width;
                 settings.canvas.height = settings.height;
 
-                if (typeof self.update !== "undefined") {
+                if (typeof self.init !== "undefined") {
                     self.init();
                 }
             }
@@ -64,7 +64,7 @@ Cosco = (function () {
                 self.clear("#66CCFF");
 
                 if (typeof self.draw !== "undefined") {
-                    self.draw(timestamp);
+                    self.draw(timestamp, context);
                 }
             }
 
