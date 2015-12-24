@@ -1,7 +1,9 @@
-Cosco.Game.Tetris = (function (Cosco) {
-    var TetrisGame = {
+(function () {
+    using(Cosco.Game, this);
+
+    TetrisGame = {
         new: function (settings) {
-            var self = Cosco.new(settings);
+            var self = Game.new(settings);
 
             self.init = function () {
                 console.log("[DEBUG]:Tetris Game init");
@@ -9,6 +11,8 @@ Cosco.Game.Tetris = (function (Cosco) {
 
             self.destroy = function () {
                 console.log("[DEBUG]:Tetris Game destroy");
+
+                self.clear("#fff");
             };
 
             self.update = function (timestamp) {
@@ -25,5 +29,4 @@ Cosco.Game.Tetris = (function (Cosco) {
             return self;
         }
     };
-    return TetrisGame;
-}(Cosco));
+}());

@@ -1,9 +1,11 @@
-Cosco = (function () {
-    var Cosco = {
+Cosco = {};
+
+Cosco.Game = {
+    Game: {
         new: function (settings) {
             var self = {}; // ~= this
 
-            var context;
+            var ctx;
             var updateAnimationFrame;
 
             self.start = function () {
@@ -19,14 +21,14 @@ Cosco = (function () {
             };
 
             self.clear = function (color) {
-                context.clearRect(0, 0, settings.width, settings.height);
-                context.fillStyle = color;
-                context.fillRect(0, 0, settings.width, settings.height);
+                ctx.clearRect(0, 0, settings.width, settings.height);
+                ctx.fillStyle = color;
+                ctx.fillRect(0, 0, settings.width, settings.height);
             };
 
             function init() {
                 console.log("[DEBUG]:Cosco init");
-                context = settings.canvas.getContext("2d");
+                ctx = settings.canvas.getContext("2d");
                 settings.canvas.width = settings.width;
                 settings.canvas.height = settings.height;
 
@@ -45,34 +47,31 @@ Cosco = (function () {
 
             function update(timestamp) {
                 console.log("[DEBUG]:Cosco update " + timestamp);
-                //updateKeyboard(timestamp);
 
                 if (typeof self.update !== "undefined") {
                     self.update(timestamp);
                 }
 
-                draw(timestamp);
+                draw(timestamp, ctx);
                 updateAnimationFrame = window.requestAnimationFrame(update);
             }
 
-            //function updateKeyboard(timestamp) {
-            //    console.log("[DEBUG]:Cosco updateKeyboard");
-            //}
-
-            function draw(timestamp) {
+            function draw(timestamp, ctx) {
                 console.log("[DEBUG]:Cosco updateDraw");
                 self.clear("#66CCFF");
 
                 if (typeof self.draw !== "undefined") {
-                    self.draw(timestamp, context);
+                    self.draw(timestamp, ctx);
                 }
             }
 
             return self;
-        },
+        }
+    }
+};
 
-        Game: {}
-    };
-
-    return Cosco;
-}());
+function using(namespace, self) {
+    for (var _class in namespace) {
+        self[_class] = namespace[_class];
+    }
+}
