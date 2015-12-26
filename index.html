@@ -10,18 +10,21 @@
 <script src="js/cosco.js"></script>
 <script src="js/cosco.game.tetris.js"></script>
 <script>
+    (function () {
+        using(Cosco.Demo, this);
 
-    var tetrisGame = TetrisGame.new({
-        width: 320,
-        height: 200,
-        canvas: document.getElementById("test")
-    });
+        var tetrisGame = TetrisGame.new({
+            width: 320,
+            height: 200,
+            canvas: document.getElementById("test")
+        });
 
-    tetrisGame.start();
+        tetrisGame.start();
 
-    document.getElementById("cancel").onclick = function () {
-        tetrisGame.exit();
-    }
+        document.getElementById("cancel").onclick = function () {
+            tetrisGame.exit();
+        }
+    }());
 </script>
 </body>
 </html>
