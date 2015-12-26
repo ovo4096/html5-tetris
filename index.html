@@ -7,11 +7,13 @@
 <body>
 <canvas id="test"></canvas>
 <button id="cancel">cancel game</button>
-<script src="js/cosco.js"></script>
-<script src="js/cosco.game.tetris.js"></script>
+
+<script src="js/Cosco/Core.js"></script>
+<script src="js/Cosco/Framework/Game.class.js"></script>
+<script src="js/TetrisGame.class.js"></script>
 <script>
     (function () {
-        using(Cosco.Demo.fuck, this);
+        using(GitHub.ovo4096.Game, this);
 
         var tetrisGame = TetrisGame.new({
             width: 320,
