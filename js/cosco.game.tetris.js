@@ -1,6 +1,6 @@
 (function () {
     using(Cosco.Game, this);
-    namespace("Cosco.Demo", {
+    namespace("Cosco.Demo.fuck", {
         TetrisGame: {
             new: function (settings) {
                 var self = Game.new(settings);

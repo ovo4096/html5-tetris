@@ -7,13 +7,17 @@ function using(namespace, self) {
 }
 
 function namespace(namespace, self) {
-    eval(namespace + ' = typeof ' + namespace + ' === "undefined" ? {} : ' + namespace + ';');
+    var nps = namespace.split(".");
+    var np = "";
+
+    for (var i in nps) {
+        np += nps[i];
+        eval(np + ' = typeof ' + np + ' === "undefined" ? {} : ' + np + ';');
+        np += ".";
+    }
+
     using(self, eval(namespace));
 }
-
-(function () {
-    namespace("Cosco");
-}());
 
 (function () {
     namespace("Cosco.Game", {
