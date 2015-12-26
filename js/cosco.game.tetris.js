@@ -1,8 +1,6 @@
 (function () {
     using(Cosco.Game, this);
-
-    Cosco.Demo = {};
-    namespace(Cosco.Demo, {
+    namespace("Cosco.Demo", {
         TetrisGame: {
             new: function (settings) {
                 var self = Game.new(settings);

@@ -7,16 +7,16 @@ function using(namespace, self) {
 }
 
 function namespace(namespace, self) {
-    namespace = typeof namespace === "undefined" ? {} : namespace;
-    using(self, namespace);
+    eval(namespace + ' = typeof ' + namespace + ' === "undefined" ? {} : ' + namespace + ';');
+    using(self, eval(namespace));
 }
 
-Cosco = typeof Cosco === "undefined" ? {} : Cosco;
-namespace(Cosco);
+(function () {
+    namespace("Cosco");
+}());
 
 (function () {
-    Cosco.Game = typeof Cosco.Game === "undefined" ? {} : Cosco.Game;
-    namespace(Cosco.Game, {
+    namespace("Cosco.Game", {
         Game: {
             new: function (settings) {
                 var self = {}; // ~= this
