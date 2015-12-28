@@ -5,26 +5,29 @@
             new: function (settings) {
                 var self = Game.new(settings);
 
-                self.init = function () {
+                var base = self.protected.init;
+                self.protected.init = function () {
+                    base.init();
                     console.log("[DEBUG]:Tetris Game init");
                 };
 
-                self.destroy = function () {
-                    console.log("[DEBUG]:Tetris Game destroy");
 
-                    self.clear("#fff");
-                };
-
-                self.update = function (timestamp) {
-                    console.log("[DEBUG]:Tetris Game update " + timestamp);
-                };
-
-                self.draw = function (timestamp, ctx) {
-                    console.log("[DEBUG]:Tetris Game draw " + timestamp);
-                    ctx.fillStyle = "#fff";
-                    ctx.font = "16px Arial";
-                    ctx.fillText("Hello World", 0, 16);
-                };
+                //function destroy() {
+                //    console.log("[DEBUG]:Tetris Game destroy");
+                //    clear("#fff");
+                //}
+                //
+                //function update(timestamp) {
+                //    console.log("[DEBUG]:Tetris Game update " + timestamp);
+                //}
+                //
+                //function draw(timestamp, ctx) {
+                //    console.log("[DEBUG]:Tetris Game draw " + timestamp);
+                //    ctx.fillStyle = "#fff";
+                //    ctx.font = "12px Arial";
+                //    datetime = new Date(timestamp);
+                //    ctx.fillText("Time: " + datetime.getTime(), 0, 16);
+                //}
 
                 return self;
             }
